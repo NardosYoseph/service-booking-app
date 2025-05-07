@@ -22,8 +22,9 @@ var filteredServices = <Service>[].obs;
     isLoading.value = true;
     try {
       final data = await repository.getServices();
-      services.value = data.cast<Service>();
+      services.value = data.map((e) => Service.fromEntity(e)).toList(); 
     } catch (e) {
+      print(e);
       Get.snackbar('Error', 'Failed to load services');
     } finally {
       isLoading.value = false;
@@ -40,11 +41,12 @@ var filteredServices = <Service>[].obs;
 
   Future<void> addService(Service service) async {
     try {
-      print(service.toEntity());
+      print(service.toJson());
       await repository.addService(service.toEntity());
       fetchServices();
       Get.back();
     } catch (e) {
+      print(e);
       Get.snackbar('Error', 'Failed to add service');
     }
   }

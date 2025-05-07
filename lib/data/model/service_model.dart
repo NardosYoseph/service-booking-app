@@ -43,13 +43,13 @@ class Service {
 
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
-      id: json['id'],
+      id: json['id'].toString(),
       name: json['name'],
       category: json['category'],
       price: double.parse(json['price'].toString()),
       imageUrl: json['imageUrl'],
       availability: json['availability'],
-      duration: json['duration'],
+      duration: json['duration'].toString(),
       rating: double.parse(json['rating'].toString()),
     );
   }
@@ -75,6 +75,19 @@ class Service {
     availability: availability,
     duration: duration,
     rating: rating,
+  );
+}
+
+factory Service.fromEntity(ServiceEntity entity) {
+  return Service(
+    id: entity.id,
+    name: entity.name,
+    category: entity.category,
+    price: entity.price,
+    imageUrl: entity.imageUrl,
+    availability: entity.availability,
+    duration: entity.duration,
+    rating: entity.rating,
   );
 }
 }

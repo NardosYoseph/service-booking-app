@@ -11,7 +11,9 @@ final Box<Service> serviceBox = Hive.box<Service>('services');
 
 Future<List<Service>> getServices() async {
   try {
-    final response = await _dio.get('$baseUrl/services');
+    print('Fetching services from API...');
+    final response = await _dio.get(baseUrl);
+    print('Response: ${response.data}');
     final List<Service> services = (response.data as List)
         .map((item) => Service.fromJson(item))
         .toList();
@@ -32,7 +34,7 @@ Future<List<Service>> getServices() async {
 }
 Future<Service> getService(String id) async {
   try {
-    final response = await _dio.get('$baseUrl/services/$id');
+    final response = await _dio.get('$baseUrl/$id');
     final Service service = Service.fromJson(response.data);
 
     await serviceBox.put(service.id, service);
@@ -48,6 +50,9 @@ Future<Service> getService(String id) async {
 }
 
   Future<void> addService(Service service) async {
+    print('Adding service to API...');
+    // service.remove('id');
+    print(baseUrl);
     await _dio.post(baseUrl, data: service.toJson());
   }
 

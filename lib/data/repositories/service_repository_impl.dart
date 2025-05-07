@@ -18,9 +18,11 @@ class ServiceRepositoryImpl implements ServiceRepository {
     final service= await apiProvider.getService(id);
     return service.toEntity();}
 
-  @override
-  Future<void> addService(ServiceEntity service) async {
-    await apiProvider.addService(service as Service);
+ @override
+  Future<void> addService(ServiceEntity entity) async {
+    print('Adding service to repository...');
+    final service = Service.fromEntity(entity); 
+    await apiProvider.addService(service);
   }
 
   @override
