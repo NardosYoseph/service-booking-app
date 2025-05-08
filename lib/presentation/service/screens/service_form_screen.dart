@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +14,7 @@ class ServiceFormPage extends StatefulWidget {
   @override
   _ServiceFormPageState createState() => _ServiceFormPageState();
 }
+
 class _ServiceFormPageState extends State<ServiceFormPage> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController name, category, price, duration, rating;
@@ -84,14 +84,20 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
         child: ListView(
           padding: EdgeInsets.all(16),
           children: [
-            TextFormField(controller: name, decoration: InputDecoration(labelText: "Name"), validator: _required),
-            TextFormField(controller: category, decoration: InputDecoration(labelText: "Category"), validator: _required),
-            TextFormField(controller: price, decoration: InputDecoration(labelText: "Price"), keyboardType: TextInputType.number, validator: _required),
-            TextFormField(controller: duration, decoration: InputDecoration(labelText: "Duration (min)"), keyboardType: TextInputType.number),
-            TextFormField(controller: rating, decoration: InputDecoration(labelText: "Rating"), keyboardType: TextInputType.number),
+            // Name Field
+            _buildTextField(controller: name, label: "Name"),
+            // Category Field
+            _buildTextField(controller: category, label: "Category"),
+            // Price Field
+            _buildTextField(controller: price, label: "Price", keyboardType: TextInputType.number),
+            // Duration Field
+            _buildTextField(controller: duration, label: "Duration (min)", keyboardType: TextInputType.number),
+            // Rating Field
+            _buildTextField(controller: rating, label: "Rating", keyboardType: TextInputType.number),
 
             SizedBox(height: 16),
-            Text("Image", style: TextStyle(fontWeight: FontWeight.bold)),
+            // Image Upload Section
+            Text("Image", style: Theme.of(context).textTheme.bodyMedium),
             SizedBox(height: 8),
             uploadedImageUrl != null
                 ? Image.network(uploadedImageUrl!, height: 150)
@@ -102,6 +108,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
               label: Text("Pick Image"),
             ),
 
+            // Availability Toggle
             SwitchListTile(
               value: available,
               onChanged: (v) => setState(() => available = v),
@@ -109,12 +116,39 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
             ),
 
             SizedBox(height: 16),
-            ElevatedButton(onPressed: _submit, child: Text("Submit")),
+            // Submit Button
+            ElevatedButton(
+              onPressed: _submit,
+              child: Text("Submit"),
+            ),
           ],
         ),
       ),
     );
   }
 
+  // Helper method to build a TextFormField with the theme
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    TextInputType? keyboardType,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextFormField(
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: label,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        keyboardType: keyboardType,
+        validator: _required,
+      ),
+    );
+  }
+
+  // Validator to ensure a field is not empty
   String? _required(String? val) => val == null || val.isEmpty ? 'Required' : null;
 }

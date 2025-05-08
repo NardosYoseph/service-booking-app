@@ -26,8 +26,9 @@ class ServiceRepositoryImpl implements ServiceRepository {
   }
 
   @override
-  Future<void> updateService(String id, ServiceEntity service) async {
-    await apiProvider.updateService(id, service as Service);
+  Future<void> updateService(String id, ServiceEntity entity) async {
+      final service = Service.fromEntity(entity); 
+    await apiProvider.updateService(id, service);
   }
 
   @override

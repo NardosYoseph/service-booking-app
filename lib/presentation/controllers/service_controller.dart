@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import '../../core/util/snackbar_helper.dart';
 import '../../data/model/service_model.dart';
 import '../../data/repositories/service_repository_impl.dart';
 
@@ -25,7 +26,7 @@ var filteredServices = <Service>[].obs;
       services.value = data.map((e) => Service.fromEntity(e)).toList(); 
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'Failed to load services');
+      showSnackbar(title: 'Error', message: 'Failed to load services', isError: true);
     } finally {
       isLoading.value = false;
     }
@@ -35,8 +36,8 @@ var filteredServices = <Service>[].obs;
     try {
       selectedService.value = await repository.getService(id) as Service;
     } catch (e) {
-      Get.snackbar('Error', 'Failed to get service');
-    }
+      showSnackbar(title: 'Error', message: 'Failed to get service', isError: true);
+          }
   }
 
   Future<void> addService(Service service) async {
@@ -45,9 +46,11 @@ var filteredServices = <Service>[].obs;
       await repository.addService(service.toEntity());
       fetchServices();
       Get.back();
+      showSnackbar(title: 'Success', message: 'Service added successfully');
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'Failed to add service');
+    showSnackbar(title: 'Error', message: 'Failed to add service', isError: true);
+
     }
   }
 
@@ -56,8 +59,11 @@ var filteredServices = <Service>[].obs;
       await repository.updateService(id, service.toEntity());
       fetchServices();
       Get.back();
+       showSnackbar(title: 'Success', message: 'Service updated successfully');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to update service');
+      print(e);
+            showSnackbar(title: 'Error', message: 'Failed to update service', isError: true);
+
     }
   }
 
@@ -65,8 +71,9 @@ var filteredServices = <Service>[].obs;
     try {
       await repository.deleteService(id);
       fetchServices();
+       showSnackbar(title: 'Success', message: 'Service deleted successfully');
     } catch (e) {
-      Get.snackbar('Error', 'Failed to delete service');
+      showSnackbar(title: 'Error', message: 'Failed to delete service', isError: true);
     }
   }
 
