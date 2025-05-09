@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import '../../../data/model/service_model.dart';
 import '../../../data/services/image_uploader.dart';
 import '../../controllers/service_controller.dart';
+import '../widgets/custom_textfield.dart';
+import '../widgets/img_picker_section.dart';  
 
 class ServiceFormPage extends StatefulWidget {
   final Service? service;
@@ -50,7 +52,7 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
         });
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Image upload failed")),
+          SnackBar(content: Text('image_upload_failed'.tr)),
         );
       }
     }
@@ -78,48 +80,36 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.service == null ? "Add Service" : "Edit Service")),
+      appBar: AppBar(title: Text(widget.service == null ? 'add_service'.tr : 'edit_service'.tr)),
       body: Form(
         key: _formKey,
         child: ListView(
           padding: EdgeInsets.all(16),
           children: [
-            // Name Field
-            _buildTextField(controller: name, label: "Name"),
-            // Category Field
-            _buildTextField(controller: category, label: "Category"),
-            // Price Field
-            _buildTextField(controller: price, label: "Price", keyboardType: TextInputType.number),
-            // Duration Field
-            _buildTextField(controller: duration, label: "Duration (min)", keyboardType: TextInputType.number),
-            // Rating Field
-            _buildTextField(controller: rating, label: "Rating", keyboardType: TextInputType.number),
+            CustomTextField(controller: name, label: 'name'.tr, validator: _required),
+            CustomTextField(controller: category, label: 'category'.tr, validator: _required),
+            CustomTextField(controller: price, label: 'price'.tr, keyboardType: TextInputType.number, validator: _required),
+            CustomTextField(controller: duration, label: 'duration'.tr, keyboardType: TextInputType.number, validator: _required),
+            CustomTextField(controller: rating, label: 'rating'.tr, keyboardType: TextInputType.number, validator: _required),
 
             SizedBox(height: 16),
-            // Image Upload Section
-            Text("Image", style: Theme.of(context).textTheme.bodyMedium),
-            SizedBox(height: 8),
-            uploadedImageUrl != null
-                ? Image.network(uploadedImageUrl!, height: 150)
-                : Text("No image selected"),
-            TextButton.icon(
-              onPressed: _pickAndUploadImage,
-              icon: Icon(Icons.image),
-              label: Text("Pick Image"),
+
+            // Replace the image picker section with the new widget
+            ImagePickerSection(
+              uploadedImageUrl: uploadedImageUrl,
+              onPickImage: _pickAndUploadImage,
             ),
 
-            // Availability Toggle
             SwitchListTile(
               value: available,
               onChanged: (v) => setState(() => available = v),
-              title: Text("Available"),
+              title: Text('available'.tr),
             ),
 
             SizedBox(height: 16),
-            // Submit Button
             ElevatedButton(
               onPressed: _submit,
-              child: Text("Submit"),
+              child: Text('submit'.tr),
             ),
           ],
         ),
@@ -127,28 +117,5 @@ class _ServiceFormPageState extends State<ServiceFormPage> {
     );
   }
 
-  // Helper method to build a TextFormField with the theme
-  Widget _buildTextField({
-    required TextEditingController controller,
-    required String label,
-    TextInputType? keyboardType,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextFormField(
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: label,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        keyboardType: keyboardType,
-        validator: _required,
-      ),
-    );
-  }
-
-  // Validator to ensure a field is not empty
-  String? _required(String? val) => val == null || val.isEmpty ? 'Required' : null;
+  String? _required(String? val) => val == null || val.isEmpty ? 'required'.tr : null;
 }

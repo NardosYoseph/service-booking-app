@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../core/util/routing/app_routes.dart';
+import '../../../core/routing/app_routes.dart';
 import '../../controllers/service_controller.dart';
 import '../widgets/service_search_bar.dart';
 import '../widgets/service_list.dart';
@@ -12,7 +12,7 @@ class ServiceListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Services'),
+        title:  Text('services'.tr),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),

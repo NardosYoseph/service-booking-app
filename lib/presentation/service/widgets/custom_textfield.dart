@@ -1,33 +1,33 @@
-
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String label;
   final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
 
   const CustomTextField({
+    super.key,
     required this.controller,
     required this.label,
     this.keyboardType,
+    this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-          filled: true,
-           fillColor: theme.inputDecorationTheme.fillColor ?? Colors.grey[100], // Use theme fill color
-          labelStyle: theme.textTheme.bodyMedium?.copyWith(color: theme.primaryColor), 
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
         keyboardType: keyboardType,
-        validator: (value) => value == null || value.isEmpty ? 'This field is required' : null,
+        validator: validator,
       ),
     );
   }

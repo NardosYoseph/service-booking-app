@@ -18,7 +18,7 @@ class ServiceList extends StatelessWidget {
           : controller.services;
 
       if (services.isEmpty) {
-        return const Center(child: Text("No services found"));
+        return Center(child: Text("no_services_found".tr));
       }
 
       return ListView.separated(

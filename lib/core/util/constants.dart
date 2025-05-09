@@ -1,5 +1,8 @@
-class AppConstants{
-  static final baseUrl= "https://681b1b5317018fe5057a06e4.mockapi.io/api/v1/service";
-  static final ImgUr_CLIENT_ID= "eb615de280d6136";
-  static final ImgUr_CLIENT_SECRET= "98a434cf7a3a07067860152416c079d166a15ff7";
+// lib/core/util/constants.dart
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
+class AppConstants {
+  static final baseUrl = dotenv.env['BASE_URL']!;
+  static final imgurClientId = dotenv.env['IMGUR_CLIENT_ID']!;
+  static final imgurClientSecret = dotenv.env['IMGUR_CLIENT_SECRET']!;
 }

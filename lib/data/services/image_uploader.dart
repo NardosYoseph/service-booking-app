@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:service_booking_app/core/util/constants.dart';
 
 class ImgurUploader {
-  static String clientId = AppConstants.ImgUr_CLIENT_ID; 
+  static String clientId = AppConstants.imgurClientId; 
   static final Dio _dio = Dio();
 
   static Future<String?> uploadImage(File imageFile) async {

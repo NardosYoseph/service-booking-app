@@ -275,6 +275,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -317,6 +325,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.7.2"
+  get_storage:
+    dependency: "direct main"
+    description:
+      name: get_storage
+      sha256: "39db1fffe779d0c22b3a744376e86febe4ade43bf65e06eab5af707dc84185a2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
   glob:
     dependency: transitive
     description:
@@ -381,6 +397,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  i18n:
+    dependency: "direct main"
+    description:
+      name: i18n
+      sha256: "6dabed0432fb6112df18dd596fd7971b85595e11623fabdc554d5eefa3222edc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.1"
   image_picker:
     dependency: "direct main"
     description:
@@ -653,6 +677,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
+  quick_log:
+    dependency: transitive
+    description:
+      name: quick_log
+      sha256: "94b0db8fe600c27788a8057496f0b51fdb799b5b35d8740ca141c9faf349dc48"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.5.3"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.28.0"
   shelf:
     dependency: transitive
     description:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/service_controller.dart';
+import '../widgets/service_detail_info_row.dart';
 import 'service_form_screen.dart';
 
 class ServiceDetailPage extends StatelessWidget {
@@ -9,7 +10,7 @@ class ServiceDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final service = controller.selectedService.value;
-    if (service == null) return Scaffold(body: Center(child: Text('No service selected')));
+    if (service == null) return Scaffold(body: Center(child: Text('no_service_selected'.tr)));
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +27,6 @@ class ServiceDetailPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Service Image with better styling and rounded corners
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
@@ -39,42 +39,16 @@ class ServiceDetailPage extends StatelessWidget {
             ),
             SizedBox(height: 16),
 
-            // Service Information: Styled and with spacing for a clean look
-            _buildInfoRow(context,"Category:", service.category),
-            _buildInfoRow(context,"Price:", "\$${service.price.toStringAsFixed(2)}"),
-            _buildInfoRow(context,"Available:", service.availability ? 'Yes' : 'No'),
-            _buildInfoRow(context,"Duration:", "${service.duration} min"),
-            _buildInfoRow(context,"Rating:", service.rating.toString()),
+          InfoRow(label: 'category'.tr, value: service.category),
+          InfoRow(label: 'price'.tr, value: "\$${service.price.toStringAsFixed(2)}"),
+          InfoRow(label: 'available'.tr, value: service.availability ? 'yes'.tr : 'no'.tr,),
+           InfoRow(label: 'duration'.tr, value: "${service.duration} min"),
+            InfoRow(label: 'rating'.tr, value: service.rating.toString()),
+
           ],
         ),
       ),
     );
   }
 
-  // Helper method to build styled info rows
-  Widget _buildInfoRow(BuildContext context, String label, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        children: [
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).textTheme.bodyMedium?.color?.withOpacity(0.7),
-                ),
-          ),
-          SizedBox(width: 8),
-          Expanded(
-            child: Text(
-              value,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).textTheme.bodyMedium?.color,
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
-}

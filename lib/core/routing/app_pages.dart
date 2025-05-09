@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
-import '../../../presentation/bindings/service_binding.dart';
-import '../../../presentation/middleware/auth_middleware.dart';
-import '../../../presentation/auth/screens/login_screen.dart';
-import '../../../presentation/service/screens/service_detail_screen.dart';
-import '../../../presentation/service/screens/service_form_screen.dart';
-import '../../../presentation/service/screens/service_list_screen.dart';
+import '../../presentation/bindings/service_binding.dart';
+import '../../presentation/middleware/auth_middleware.dart';
+import '../../presentation/auth/screens/login_screen.dart';
+import '../../presentation/service/screens/service_detail_screen.dart';
+import '../../presentation/service/screens/service_form_screen.dart';
+import '../../presentation/service/screens/service_list_screen.dart';
 import 'app_routes.dart';
 
 class AppPages {

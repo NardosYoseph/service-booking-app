@@ -11,7 +11,7 @@ class ServiceSearchBar extends StatelessWidget {
 
     return TextField(
       decoration: InputDecoration(
-        hintText: "Search by name, category, or rating",
+        hintText: "search_by_name".tr,
         prefixIcon: const Icon(Icons.search),
       ),
       onChanged: controller.filterServices,

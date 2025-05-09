@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:service_booking_app/core/routing/app_pages.dart';
+import 'package:service_booking_app/core/routing/app_routes.dart';
 import '../../core/util/snackbar_helper.dart';
 import '../../data/model/service_model.dart';
 import '../../data/repositories/service_repository_impl.dart';
@@ -26,7 +28,7 @@ var filteredServices = <Service>[].obs;
       services.value = data.map((e) => Service.fromEntity(e)).toList(); 
     } catch (e) {
       print(e);
-      showSnackbar(title: 'Error', message: 'Failed to load services', isError: true);
+      showSnackbar(title: 'error'.tr, message: 'failed_get_service'.tr, isError: true);
     } finally {
       isLoading.value = false;
     }
@@ -36,7 +38,7 @@ var filteredServices = <Service>[].obs;
     try {
       selectedService.value = await repository.getService(id) as Service;
     } catch (e) {
-      showSnackbar(title: 'Error', message: 'Failed to get service', isError: true);
+      showSnackbar(title: 'error'.tr, message: 'failed_get_service'.tr, isError: true);
           }
   }
 
@@ -46,10 +48,10 @@ var filteredServices = <Service>[].obs;
       await repository.addService(service.toEntity());
       fetchServices();
       Get.back();
-      showSnackbar(title: 'Success', message: 'Service added successfully');
+  showSnackbar(title: 'success'.tr, message: 'service_added'.tr);
     } catch (e) {
       print(e);
-    showSnackbar(title: 'Error', message: 'Failed to add service', isError: true);
+    showSnackbar(title: 'error'.tr, message: 'failed_add_service'.tr, isError: true);
 
     }
   }
@@ -58,11 +60,11 @@ var filteredServices = <Service>[].obs;
     try {
       await repository.updateService(id, service.toEntity());
       fetchServices();
-      Get.back();
-       showSnackbar(title: 'Success', message: 'Service updated successfully');
+      Get.toNamed(AppRoutes.serviceList);
+   showSnackbar(title: 'success'.tr, message: 'service_updated'.tr);
     } catch (e) {
       print(e);
-            showSnackbar(title: 'Error', message: 'Failed to update service', isError: true);
+   showSnackbar(title: 'error'.tr, message: 'failed_update_service'.tr, isError: true);
 
     }
   }
@@ -71,9 +73,10 @@ var filteredServices = <Service>[].obs;
     try {
       await repository.deleteService(id);
       fetchServices();
-       showSnackbar(title: 'Success', message: 'Service deleted successfully');
+  showSnackbar(title: 'success'.tr, message: 'service_deleted'.tr);
+
     } catch (e) {
-      showSnackbar(title: 'Error', message: 'Failed to delete service', isError: true);
+ showSnackbar(title: 'error'.tr, message: 'failed_delete_service'.tr, isError: true);
     }
   }
 
